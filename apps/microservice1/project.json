@@ -10,7 +10,8 @@
         "outputPath": "dist/apps/microservice1",
         "main": "apps/microservice1/src/main.ts",
         "tsConfig": "apps/microservice1/tsconfig.app.json",
-        "assets": ["apps/microservice1/src/assets"]
+        "assets": ["apps/microservice1/src/assets"],
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
