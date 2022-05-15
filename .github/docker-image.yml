@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ staging, master ]
+  pull_request:
+    branches: [ staging, master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker images
+      run: docker-compose build
+    - name: Tag the docker backend image
+      run: docker tag nxkube_backend shanurcsenitap/nxkube_backend:latest    
+    - name: Tag docker frontend image
+      run: docker tag nxkube_frontend shanurcsenitap/nxkube_frontend:latest
+
+    - name: Push frontend image to docker registry
+      run: docker push shanurcsenitap/nxkube_frontend:latest
+    - name: Push backend image to registry
+      run: docker push shanurcsenitap/nxkube_backend:latest
