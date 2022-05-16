@@ -6,7 +6,7 @@ metadata:
     app: angular
 spec:
   # modify replicas according to your case
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: angular
@@ -18,7 +18,15 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: angular
+        imagePullPolicy: Always
         image: shanurcsenitap/nxkube_frontend
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
         ports:
         - name: staticcontent
           containerPort:  80
@@ -26,10 +34,11 @@ spec:
         # env:
         # - name: NGX_VERSION
         #   value: 1.16.1
-        volumeMounts:
-        - name: nginx
-          mountPath: /etc/nginx/conf.d
-      volumes:
-        - name: nginx
-          hostPath:
-            path: ./conf.d
+      #   volumeMounts:
+      #   - name: nginx
+      #     mountPath: /etc/nginx/conf.d
+      # volumes:
+      #   - name: nginx
+      #     hostPath:
+      #       path: /home/shanurrahman/Documents/personal/nxkube/conf.d
+      #       type: Directory

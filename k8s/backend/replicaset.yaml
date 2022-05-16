@@ -18,6 +18,7 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: nestjs
+        imagePullPolicy: Always
         image: shanurcsenitap/nxkube_backend:latest
         ports:
         - name: api

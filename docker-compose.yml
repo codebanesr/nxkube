@@ -15,5 +15,5 @@ services:
     ports:
     - "80:80"
     # For nginx reverse proxy configuration remove the lines below
-    # volumes:
-    #   - ./conf.d:/etc/nginx/conf.d
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
