@@ -22,7 +22,7 @@ spec:
         image: shanurcsenitap/nxkube_backend:latest
         ports:
         - name: api
-          containerPort:  8080
+          containerPort:  80
           protocol: TCP
       #   env:
       #   - name: NGX_VERSION

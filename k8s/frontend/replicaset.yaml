@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: nginx
           hostPath:
+            # minikube start --mount --mount-string="/home/shanurrahman/Documents/personal/nxkube/conf.d:/tmp/nginx"
+            # inside minikube we mounted this path to /tmp/nginx
             path: /tmp/nginx
             type: Directory
-
-# minikube start --mount --mount-string="/tmp/nginx:/tmp/nginx"
