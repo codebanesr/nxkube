@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: angular
+  labels:
+    app: angular
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - name: angular
+        image: shanurcsenitap/nxkube_frontend
+        ports:
+        - name: staticcontent
+          containerPort:  80
+          protocol: TCP
+        # env:
+        # - name: NGX_VERSION
+        #   value: 1.16.1
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx
+          hostPath:
+            path: ./conf.d
