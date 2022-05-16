@@ -6,7 +6,7 @@ services:
       context: .
       target: microservice1
     ports:
-      - "8080:8080"
+      - "80:80"
   frontend:
     container_name: frontend
     build:

@@ -34,11 +34,13 @@ spec:
         # env:
         # - name: NGX_VERSION
         #   value: 1.16.1
-      #   volumeMounts:
-      #   - name: nginx
-      #     mountPath: /etc/nginx/conf.d
-      # volumes:
-      #   - name: nginx
-      #     hostPath:
-      #       path: /home/shanurrahman/Documents/personal/nxkube/conf.d
-      #       type: Directory
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx
+          hostPath:
+            path: /tmp/nginx
+            type: Directory
+
+# minikube start --mount --mount-string="/tmp/nginx:/tmp/nginx"
