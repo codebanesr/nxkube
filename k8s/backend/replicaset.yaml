@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: nestjs
+        istio-injection: enabled
+        version: v2backend
     spec:
       automountServiceAccountToken: true
       containers:

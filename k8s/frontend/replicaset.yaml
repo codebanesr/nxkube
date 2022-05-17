@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: angular
+        istio-injection: enabled
+        version: v2frontend
     spec:
       automountServiceAccountToken: true
       containers:
