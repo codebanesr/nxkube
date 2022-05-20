@@ -5,4 +5,4 @@
 
 
 ## Final uri will look something like the following
-`mongodb://mongo1:27021,mongo2:27022,mongo3:27023/?replicaSet=my-replica-set`
+`mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=my-replica-set`
