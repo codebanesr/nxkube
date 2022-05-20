@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.8"
 
 services:
   mongo1:
@@ -31,3 +31,6 @@ services:
       - ./data/mongo-3:/data/db
     ports:
       - 30003:30003
+
+
+# mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=my-replica-set
