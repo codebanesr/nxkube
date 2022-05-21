@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nxingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  defaultBackend:
+    service:
+      name: nestjs
+      port:
+        number: 8080
+  rules:
+  - host: "172-104-37-92.ip.linodeusercontent.com" # Public ip of the server where the content is hosted, add an entry to /etc/hosts for minikube
+    http:
+      paths:
+      - pathType: Prefix # These prefixes are not being removed, as such the service will receive the exact same request
+        path: /api
+        backend:
+          service:
+            name: nestjs
+            port:
+              number: 8080
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: angular
+            port:
+              number: 4200
