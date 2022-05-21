@@ -18,7 +18,7 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - uses: actions/checkout@v3
     - name: Build Docker images
-      run: docker-compose build
+      run: docker-compose build --parallel
     - name: Tag the docker backend image
       run: docker tag nxkube_backend shanurcsenitap/nxkube_backend:latest    
     - name: Tag docker frontend image

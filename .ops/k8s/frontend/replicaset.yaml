@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: angular
+  labels:
+    app: angular
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+        istio-injection: enabled
+        version: v2frontend
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - name: angular
+        imagePullPolicy: Always
+        image: shanurcsenitap/nxkube_frontend
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - name: staticcontent
+          containerPort:  80
+          protocol: TCP
+        # env:
+        # - name: NGX_VERSION
+        #   value: 1.16.1
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx
+          hostPath:
+            # minikube start --mount --mount-string="/home/shanurrahman/Documents/personal/nxkube/conf.d:/tmp/nginx"
+            # inside minikube we mounted this path to /tmp/nginx
+            path: /tmp/nginx
+            type: Directory

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nestjs
+  labels:
+    app: nestjs
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nestjs
+  template:
+    metadata:
+      labels:
+        app: nestjs
+        istio-injection: enabled
+        version: v2backend
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - name: nestjs
+        imagePullPolicy: Always
+        image: shanurcsenitap/nxkube_backend:latest
+        ports:
+        - name: api
+          containerPort:  80
+          protocol: TCP
+      #   env:
+      #   - name: NGX_VERSION
+      #     value: 1.16.1
+      #   volumeMounts:
+      #   - name: localtime
+      #     mountPath: /etc/localtime
+      # volumes:
+      #   - name: localtime
+      #     hostPath:
+      #       path: /usr/share/zoneinfo/Asia/Shanghai

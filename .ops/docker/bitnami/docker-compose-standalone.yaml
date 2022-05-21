@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+  mongo1:
+    container_name: mongo1
+    image: bitnami/mongodb:latest
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGODB_REPLICA_SET_MODE=primary
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+  mongo2:
+    image: bitnami/mongodb:latest
+    container_name: mongo2
+    depends_on:
+      - mongo1
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_INITIAL_PRIMARY_HOST=mongo1
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+  mongo3:
+    image: bitnami/mongodb:latest
+    container_name: mongo3
+    depends_on:
+      - mongo1
+    ports:
+      - "27020:27017"
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_INITIAL_PRIMARY_HOST=mongo1
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+
+volumes:
+  mongodb_data:
+    driver: local
+
+
+# mongodb://mongo1:27018,mongo2:27019,mongo3:27020/?replicaSet=replicaset
+# mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=replicaset
