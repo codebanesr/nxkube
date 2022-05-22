@@ -18,6 +18,17 @@ spec:
         version: v2frontend
     spec:
       automountServiceAccountToken: true
+      initContainers:
+      - name: install
+        image: busybox:1.28
+        command:
+        - wget
+        - "-O"
+        - "/conf.d/default.conf"
+        - "https://raw.githubusercontent.com/shanurrahman/nxkube/master/conf.d/default.conf"
+        volumeMounts:
+        - name: workdir
+          mountPath: "/conf.d"
       containers:
       - name: angular
         imagePullPolicy: Always
@@ -37,12 +48,9 @@ spec:
         # - name: NGX_VERSION
         #   value: 1.16.1
         volumeMounts:
-        - name: nginx
+        - name: workdir
           mountPath: /etc/nginx/conf.d
       volumes:
-        - name: nginx
-          hostPath:
-            # minikube start --mount --mount-string="/home/shanurrahman/Documents/personal/nxkube/conf.d:/tmp/nginx"
-            # inside minikube we mounted this path to /tmp/nginx
-            path: /tmp/nginx
-            type: Directory
+        - name: workdir
+          emptyDir: {}
+

@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: angular
-  type: NodePort
+  type: ClusterIP
   sessionAffinity: None
   sessionAffinityConfig:
     clientIP:
@@ -14,6 +14,6 @@ spec:
   ports:
   - name: angular
     protocol: TCP
-    port: 80
-    nodePort: 30036
+    port: 4200
+    # nodePort: 30036
     targetPort: 80
