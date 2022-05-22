@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argoingress
+  namespace: argocd
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  defaultBackend:
+    service:
+      name: argocd-server
+      port:
+        number: 80
+  rules:
+  - host: "argocd.linodeusercontent.com" # Public ip of the server where the content is hosted, add an entry to /etc/hosts for minikube
+    http:
+      paths:
+      - pathType: Prefix
+        path: /argo
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80

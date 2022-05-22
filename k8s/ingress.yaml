@@ -11,7 +11,7 @@ spec:
       port:
         number: 8080
   rules:
-  - host: "172-104-37-92.ip.linodeusercontent.com" # Public ip of the server where the content is hosted, add an entry to /etc/hosts for minikube
+  - host: "privateip.linodeusercontent.com" # Public ip of the server where the content is hosted, add an entry to /etc/hosts for minikube
     http:
       paths:
       - pathType: Prefix # These prefixes are not being removed, as such the service will receive the exact same request

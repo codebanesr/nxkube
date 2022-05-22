@@ -7,3 +7,8 @@ format -> `minikube start --mount --mount-string="/host/path:/minikubeContainer/
 
 # Start making calls to backend through nginx
 `curl http://192.168.49.2:30036/api/`
+
+
+
+# To enable istio injection on default namespace
+`k label ns default istio-injection=enabled`
